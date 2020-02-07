@@ -23,21 +23,15 @@ port = 3030
 
 <br>
 
-default value
+and, your `default-env.ts` is like below
 
 ```javascript
-const envDefault = {
+export const envDefault = {
   host: '',
   port: '',
 }
-```
 
-<br>
-
-rules of .env
-
-```javascript
-const envRules = {
+export const envRules = {
   host: {
     required: true, // default is true
     validator: value => /[\d]+\.[\d]+\.[\d]+\.[\d]+/.test(value),
@@ -50,7 +44,11 @@ const envRules = {
 then, `validate` throw error
 
 ```javascript
+import {envDefault, envRules} from './default-env.ts'
+import dotenv from 'dotenv'
+
 try {
+  const envParsed = dotenv.config().parsed
   validate({envDefault, envParsed, envRules})
 } catch (e) {
   console.error(e) // print error `'host' is not valid in '.env'`
