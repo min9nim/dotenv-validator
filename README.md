@@ -8,7 +8,9 @@ You can validate environment variables defined in `.env` with `dotenv-validator`
 
 1. [dotenv](https://www.npmjs.com/package/dotenv) installed
 1. default value of environment variables is ready
-1. validation rules of variables is optional
+1. validation rules of variables is ready
+
+<br>
 
 ## Usage
 
@@ -19,6 +21,8 @@ host = 0.0.0.A
 port = 3030
 ```
 
+<br>
+
 default value
 
 ```javascript
@@ -27,6 +31,8 @@ const envDefault = {
   port: '',
 }
 ```
+
+<br>
 
 rules of .env
 
@@ -38,6 +44,8 @@ const envRules = {
   },
 }
 ```
+
+<br>
 
 then, `validate` throw error
 
