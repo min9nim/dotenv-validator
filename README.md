@@ -14,7 +14,7 @@ You can validate environment variables defined in `.env` with `dotenv-validator`
 
 ## Usage
 
-your `.env`
+your `.env` _with invalid host_
 
 ```
 host = 0.0.0.A
