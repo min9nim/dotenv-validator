@@ -12,7 +12,7 @@ describe('dotenv-validator', () => {
   }
   const envRules = {
     host: {
-      validator: value => /[\d]+\.[\d]+\.[\d]+\.[\d]+/.test(value),
+      validator: value => /\d+\.\d+\.\d+\.\d+/.test(value),
     },
   }
   it('should be passed with valid value', () => {
