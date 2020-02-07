@@ -42,7 +42,7 @@ describe('dotenv-validator', () => {
       expect(e.message).to.be.equal(`'port' is required in .env`)
     }
   })
-  it('should be failed when required valud is not found .env', () => {
+  it('should be failed when required value is not found .env', () => {
     const envDefault = {
       host: '',
       port: '',
