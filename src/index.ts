@@ -52,27 +52,24 @@ export default function validate({envParsed, envDefault, envRules, logPassedMsg}
 
   // check validator
   if (envRules) {
-    for (const key in envParsed) {
-      if (!envParsed.hasOwnProperty(key)) {
-        continue
-      }
+    Object.entries(envParsed).forEach(([key, value]) => {
       if (!envRules[key]) {
         // 룰 자체를 등록하지 않은 경우 skip
-        continue
+        return
       }
       const validator = envRules[key].validator
       if (!validator) {
         // validator 등록을 하지 않은 경우 skip
-        continue
+        return
       }
-      const result = validator(envParsed[key])
+      const result = validator(value)
       if (result === false) {
         throw Error(`'${key}' is not valid in '.env'`)
       }
       if (result.valid === false) {
         throw Error(result.message)
       }
-    }
+    })
   }
 
   if (logPassedMsg !== false) {
