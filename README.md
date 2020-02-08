@@ -27,8 +27,8 @@ and your `default-env.ts` is like below
 
 ```javascript
 export const envDefault = {
-  host: "",
-  port: "",
+  host: '',
+  port: '',
 }
 
 export const envRules = {
@@ -44,18 +44,18 @@ export const envRules = {
 then, `validate` throw error
 
 ```javascript
-import { envDefault, envRules } from "./default-env.ts"
-import dotenv from "dotenv"
+import {envDefault, envRules} from './default-env.ts'
+import dotenv from 'dotenv'
 
 try {
   // load .env
   const envParsed = dotenv.config().parsed
 
   // set default to process.env
-  process.env = { ...envDefault, ...process.env }
+  process.env = {...envDefault, ...process.env}
 
   // validate process.env
-  validate({ envDefault, envParsed, envRules })
+  validate({envDefault, envParsed, envRules})
 } catch (e) {
   console.error(e) // print error `'host' is not valid in '.env'`
 }
