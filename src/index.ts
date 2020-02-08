@@ -39,19 +39,16 @@ export default function validate({envParsed, envDefault, envRules, logPassedMsg}
   })
 
   // check required
-  for (const key in envDefault) {
-    if (!envDefault.hasOwnProperty(key)) {
-      continue
-    }
+  Object.keys(envDefault).forEach(key => {
     if (envRules && envRules[key] && !envRules[key].required) {
       // 명시적으로 required 를 false 로 세팅한 경우만 필수값 체크를 하지 않는다.
       // 해당 설정 값의 룰을 등록하지 않은 경우 해당 값은 기본적으로 필수 값이 된다.
-      continue
+      return
     }
     if (!env[key]) {
       throw Error(`'${key}' is required in .env`)
     }
-  }
+  })
 
   // check validator
   if (envRules) {
