@@ -32,14 +32,11 @@ export default function validate({envParsed, envDefault, envRules, logPassedMsg}
   }
   const env = {...envDefault, ...envParsed}
   // check default
-  for (const key in envParsed) {
-    if (!envParsed.hasOwnProperty(key)) {
-      continue
-    }
+  Object.keys(envParsed).forEach(key => {
     if (!envDefault.hasOwnProperty(key)) {
       throw Error(`${key}'s defaultValue is not found`)
     }
-  }
+  })
 
   // check required
   for (const key in envDefault) {
