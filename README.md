@@ -44,7 +44,7 @@ export const envRules = {
 then, `validate` throw error
 
 ```javascript
-import {envDefault, envRules} from './default-env.ts'
+import { envDefault, envRules } from './default-env.ts'
 import dotenv from 'dotenv'
 
 try {
@@ -52,10 +52,10 @@ try {
   const envParsed = dotenv.config().parsed
 
   // set default to process.env
-  process.env = {...envDefault, ...process.env}
+  process.env = { ...envDefault, ...process.env }
 
   // validate process.env
-  validate({envDefault, envParsed, envRules})
+  validate({ envDefault, envParsed, envRules }) // throw error if process.env is not valid
 } catch (e) {
   console.error(e) // print error `'host' is not valid in '.env'`
 }
