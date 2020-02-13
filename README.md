@@ -54,6 +54,7 @@ then, `validate` throw error
 ```javascript
 import {envDefault, envRules} from './default-env.ts'
 import dotenv from 'dotenv'
+import validate from 'dotenv-validator'
 
 try {
   // load .env
