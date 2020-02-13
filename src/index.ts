@@ -21,7 +21,7 @@ export interface IEnv {
 }
 
 export interface IValidateInput {
-  envParsed: IEnv
+  envParsed?: IEnv
   envDefault: IEnv
   envRules?: IEnvRules
   logPassedMsg?: boolean
