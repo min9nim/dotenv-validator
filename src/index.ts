@@ -22,7 +22,7 @@ export interface IEnv {
 
 export interface IValidateInput {
   envParsed?: IEnv
-  envDefault: IEnv
+  envDefault: any // IEnv 대신 그냥 any 사용;) https://stackoverflow.com/questions/37006008/typescript-index-signature-is-missing-in-type
   envRules?: IEnvRules
   logPassedMsg?: boolean
 }
