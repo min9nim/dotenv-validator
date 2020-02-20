@@ -35,12 +35,12 @@ and your `default-env.ts` is like below
 
 ```javascript
 export const envDefault = {
-  host: '',
-  port: '',
+  HOST: '',
+  PORT: '',
 }
 
 export const envRules = {
-  host: {
+  HOST: {
     required: true, // default is true
     validator: value => /\d+\.\d+\.\d+\.\d+/.test(value),
   },
