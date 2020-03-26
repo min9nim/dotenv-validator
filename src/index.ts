@@ -30,7 +30,7 @@ export default function validate({envParsed, envDefault, envRules, logPassedMsg}
   if (!envParsed) {
     throw Error('envParsed is empty')
   }
-  const env = {...envDefault, ...envParsed}
+  const env: IEnv = {...envDefault, ...envParsed} // envParsed 는 설정된 값이 언제나 스트링임이 보장된다
   // check default
   Object.keys(envParsed).forEach(key => {
     if (!envDefault.hasOwnProperty(key)) {
@@ -40,7 +40,7 @@ export default function validate({envParsed, envDefault, envRules, logPassedMsg}
 
   // check required
   Object.keys(envDefault).forEach(key => {
-    if (envRules && envRules[key] && !envRules[key].required) {
+    if (envRules && envRules[key] && envRules[key].required === false) {
       // 명시적으로 required 를 false 로 세팅한 경우만 필수값 체크를 하지 않는다.
       // 해당 설정 값의 룰을 등록하지 않은 경우 해당 값은 기본적으로 필수 값이 된다.
       return
@@ -52,7 +52,7 @@ export default function validate({envParsed, envDefault, envRules, logPassedMsg}
 
   // check validator
   if (envRules) {
-    Object.entries(envParsed).forEach(([key, value]) => {
+    Object.entries(env).forEach(([key, value]) => {
       if (!envRules[key]) {
         // 룰 자체를 등록하지 않은 경우 skip
         return

@@ -68,4 +68,43 @@ describe('dotenv-validator', () => {
       expect(e.message).to.be.equal(`'protocol' is required in .env`)
     }
   })
+  it('should be thrown error when value is undefined', () => {
+    const envParsed = {}
+    const envDefault = {
+      protocol: '',
+    }
+    const envRules = {
+      protocol: {
+        validator: value => {
+          return value === 'https' || value === 'http'
+        },
+      },
+    }
+    try {
+      validate({envDefault, envParsed, envRules})
+      expect(true).to.be.equal(false)
+    } catch (e) {
+      expect(e.message).to.be.equal(`'protocol' is required in .env`)
+    }
+  })
+  it('should be thrown error when value is not valid', () => {
+    const envParsed = {}
+    const envDefault = {
+      protocol: '',
+    }
+    const envRules = {
+      protocol: {
+        required: false,
+        validator: value => {
+          return value === 'https' || value === 'http'
+        },
+      },
+    }
+    try {
+      validate({envDefault, envParsed, envRules})
+      expect(true).to.be.equal(false)
+    } catch (e) {
+      expect(e.message).to.be.equal(`'protocol' is not valid in '.env'`)
+    }
+  })
 })
