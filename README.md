@@ -31,7 +31,7 @@ port = 3030
 
 <br>
 
-and your `default-env.ts` is like below
+and your `default-env.js` is like below
 
 ```javascript
 export const envDefault = {
@@ -52,7 +52,7 @@ export const envRules = {
 then, `validate` throw error
 
 ```javascript
-import {envDefault, envRules} from './default-env.ts'
+import {envDefault, envRules} from './default-env'
 import dotenv from 'dotenv'
 import validate from 'dotenv-validator'
 
