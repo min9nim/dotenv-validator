@@ -26,10 +26,7 @@ export interface IValidateInput {
   envRules?: IEnvRules
   logPassedMsg?: boolean
 }
-export default function validate({envParsed, envDefault, envRules, logPassedMsg}: IValidateInput) {
-  if (!envParsed) {
-    throw Error('envParsed is empty')
-  }
+export default function validate({envParsed = {}, envDefault, envRules, logPassedMsg}: IValidateInput) {
   const env: IEnv = {...envDefault, ...envParsed} // envParsed 는 설정된 값이 언제나 스트링임이 보장된다
   // check default
   Object.keys(envParsed).forEach(key => {

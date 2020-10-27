@@ -107,4 +107,17 @@ describe('dotenv-validator', () => {
       expect(e.message).to.be.equal(`'protocol' is not valid in '.env'`)
     }
   })
+  it('should be used empty object when envParsed is undefined', () => {
+    const envParsed = undefined
+    const envDefault = {
+      protocol: '',
+    }
+    const envRules = {}
+    try{
+      validate({envDefault, envParsed, envRules})
+      expect(true).to.be.equal(false)
+    }catch(e){
+      expect(e.message).to.be.equal(`'protocol' is required in .env`)
+    }
+  })
 })
