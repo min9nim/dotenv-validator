@@ -41,7 +41,7 @@ export const envDefault = {
 
 export const envRules = {
   HOST: {
-    required: true, // default is true
+    required: true, // default is false
     validator: value => /\d+\.\d+\.\d+\.\d+/.test(value),
   },
 }
