@@ -69,7 +69,7 @@ export default function validate({
       }
       const result = validator(value)
       if (result === false) {
-        throw Error(`'${key}' is not valid in '.env'`)
+        throw Error(`'${key}' is not valid in .env`)
       }
       if (result.valid === false) {
         throw Error(result.message)
