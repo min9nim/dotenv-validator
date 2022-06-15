@@ -25,26 +25,8 @@ npm i dotenv-validator
 If your `.env` is like below (_with invalid host_)
 
 ```
-host = 0.0.0.A
-port = 3030
-```
-
-<br>
-
-and your `default-env.js` is like below
-
-```javascript
-export const envDefault = {
-  HOST: '',
-  PORT: '',
-}
-
-export const envRules = {
-  HOST: {
-    required: true, // default is false
-    validator: value => /\d+\.\d+\.\d+\.\d+/.test(value),
-  },
-}
+HOST=0.0.0.A
+PORT=3030
 ```
 
 <br>
@@ -52,11 +34,22 @@ export const envRules = {
 then, `validate` throw error
 
 ```javascript
-import {envDefault, envRules} from './default-env'
 import dotenv from 'dotenv'
 import validate from 'dotenv-validator'
 
 try {
+  const envDefault = {
+    HOST: '',
+    PORT: '',
+  }
+
+  const envRules = {
+    HOST: {
+      required: true, // default is false
+      validator: value => /\d+\.\d+\.\d+\.\d+/.test(value),
+    },
+  }
+
   // load .env
   const envParsed = dotenv.config().parsed
 
@@ -66,6 +59,6 @@ try {
   // validate process.env
   validate({envDefault, envParsed, envRules}) // throw error if process.env is not valid
 } catch (e) {
-  console.error(e) // print error `'host' is not valid in '.env'`
+  console.error(e) // print error `'HOST' is required in .env`
 }
 ```
