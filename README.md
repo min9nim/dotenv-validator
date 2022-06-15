@@ -59,6 +59,6 @@ try {
   // validate process.env
   validate({envDefault, envParsed, envRules}) // throw error if process.env is not valid
 } catch (e) {
-  console.error(e) // print error `'HOST' is required in .env`
+  console.error(e) // print error `'HOST' is not valid in .env`
 }
 ```
