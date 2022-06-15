@@ -28,7 +28,7 @@ describe('dotenv-validator', () => {
       validate({envDefault, envParsed, envRules})
       expect(true).to.be.equal(false)
     } catch (e) {
-      expect(`'host' is not valid in '.env'`).to.be.equal(e.message)
+      expect(`'host' is not valid in .env`).to.be.equal(e.message)
     }
   })
   it('should be failed when parsed value is not found envDefault', () => {
@@ -100,7 +100,7 @@ describe('dotenv-validator', () => {
       validate({envDefault, envParsed, envRules})
       expect(true).to.be.equal(false)
     } catch (e) {
-      expect(e.message).to.be.equal(`'protocol' is not valid in '.env'`)
+      expect(e.message).to.be.equal(`'protocol' is not valid in .env`)
     }
   })
   it('should be thrown error when value is not valid', () => {
@@ -120,7 +120,7 @@ describe('dotenv-validator', () => {
       validate({envDefault, envParsed, envRules})
       expect(true).to.be.equal(false)
     } catch (e) {
-      expect(e.message).to.be.equal(`'protocol' is not valid in '.env'`)
+      expect(e.message).to.be.equal(`'protocol' is not valid in .env`)
     }
   })
   it('should be used empty object when envParsed is undefined', () => {
