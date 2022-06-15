@@ -26,7 +26,12 @@ export interface IValidateInput {
   envRules?: IEnvRules
   logPassedMsg?: boolean
 }
-export default function validate({envParsed = {}, envDefault, envRules, logPassedMsg}: IValidateInput) {
+export default function validate({
+  envParsed = {},
+  envDefault,
+  envRules,
+  logPassedMsg,
+}: IValidateInput) {
   const env: IEnv = {...envDefault, ...envParsed} // envParsed 는 설정된 값이 언제나 스트링임이 보장된다
   // check default
   Object.keys(envParsed).forEach(key => {
@@ -36,16 +41,19 @@ export default function validate({envParsed = {}, envDefault, envRules, logPasse
   })
 
   // check required
-  Object.keys(envDefault).forEach(key => {
-    if (envRules && envRules[key] && envRules[key].required === false) {
-      // 명시적으로 required 를 false 로 세팅한 경우만 필수값 체크를 하지 않는다.
-      // 해당 설정 값의 룰을 등록하지 않은 경우 해당 값은 기본적으로 필수 값이 된다.
-      return
-    }
-    if (!env[key]) {
-      throw Error(`'${key}' is required in .env`)
-    }
-  })
+  if (envRules) {
+    Object.keys(envRules).forEach(key => {
+      if (envRules[key].required !== true) {
+        // 명시적으로 required 를 false 로 세팅한 경우만 필수값 체크를 하지 않는다.
+        // 해당 설정 값의 룰을 등록하지 않은 경우 해당 값은 기본적으로 필수 값이 된다.
+        return
+      } else {
+        if (!env[key]) {
+          throw Error(`'${key}' is required in .env`)
+        }
+      }
+    })
+  }
 
   // check validator
   if (envRules) {

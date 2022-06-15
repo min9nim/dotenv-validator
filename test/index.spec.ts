@@ -36,7 +36,15 @@ describe('dotenv-validator', () => {
       host: '0.0.0.0',
     }
     try {
-      validate({envDefault, envParsed, envRules})
+      validate({
+        envDefault,
+        envParsed,
+        envRules: {
+          port: {
+            required: true,
+          },
+        },
+      })
       expect(true).to.be.equal(false)
     } catch (e) {
       expect(e.message).to.be.equal(`'port' is required in .env`)
@@ -49,7 +57,15 @@ describe('dotenv-validator', () => {
       protocol: '',
     }
     try {
-      validate({envDefault, envParsed, envRules})
+      validate({
+        envDefault,
+        envParsed,
+        envRules: {
+          protocol: {
+            required: true,
+          },
+        },
+      })
       expect(true).to.be.equal(false)
     } catch (e) {
       expect(e.message).to.be.equal(`'protocol' is required in .env`)
@@ -63,9 +79,9 @@ describe('dotenv-validator', () => {
     }
     try {
       validate({envDefault, envParsed})
-      expect(true).to.be.equal(false)
+      expect(true).to.be.equal(true)
     } catch (e) {
-      expect(e.message).to.be.equal(`'protocol' is required in .env`)
+      expect(true).to.be.equal(false)
     }
   })
   it('should be thrown error when value is undefined', () => {
@@ -84,7 +100,7 @@ describe('dotenv-validator', () => {
       validate({envDefault, envParsed, envRules})
       expect(true).to.be.equal(false)
     } catch (e) {
-      expect(e.message).to.be.equal(`'protocol' is required in .env`)
+      expect(e.message).to.be.equal(`'protocol' is not valid in '.env'`)
     }
   })
   it('should be thrown error when value is not valid', () => {
@@ -113,11 +129,47 @@ describe('dotenv-validator', () => {
       protocol: '',
     }
     const envRules = {}
-    try{
+    try {
+      validate({envDefault, envParsed, envRules})
+      expect(true).to.be.equal(true)
+    } catch (e) {
+      expect(true).to.be.equal(false)
+    }
+  })
+
+  it('should be failed when envRules item is not found .env', () => {
+    const envParsed = undefined
+    const envDefault = {
+      protocol: 'xx',
+    }
+    const envRules = {
+      host: {
+        required: true,
+      },
+    }
+    try {
       validate({envDefault, envParsed, envRules})
       expect(true).to.be.equal(false)
-    }catch(e){
-      expect(e.message).to.be.equal(`'protocol' is required in .env`)
+    } catch (e) {
+      expect(e.message).to.be.equal(`'host' is required in .env`)
+    }
+  })
+
+  it('should be failed when envRules item is not found .env', () => {
+    const envParsed = undefined
+    const envDefault = {
+      protocol: 'xx',
+    }
+    const envRules = {
+      host: {
+        required: false,
+      },
+    }
+    try {
+      validate({envDefault, envParsed, envRules})
+      expect(true).to.be.equal(true)
+    } catch (e) {
+      expect(true).to.be.equal(false)
     }
   })
 })
